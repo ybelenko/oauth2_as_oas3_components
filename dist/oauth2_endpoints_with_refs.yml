@@ -1,0 +1,97 @@
+openapi: '3.0.2'
+info:
+  title: OAuth2 Token Endpoint Components
+  version: '1.0'
+  description: |-
+    This document omits authorization endpoint on purpose. I don't know how to describe it with OAS3 since endpoint response isn't JSON(html page). If you have any suggestion please submit an issue to this repo.
+
+    Quote from [RFC 6749 - The OAuth2.0 Authorization Framework - 2.3.1. Client Password](https://tools.ietf.org/html/rfc6749#section-2.3.1):
+
+    > Including the client credentials in the request-body using the two parameters is **NOT RECOMMENDED** and **SHOULD** be limited to clients unable to directly utilize the HTTP Basic authentication scheme (or other password-based HTTP authentication schemes).
+    > The parameters can only be transmitted in the request-body and **MUST NOT** be included in the request URI.
+servers:
+  - url: https://server.example.com/
+paths:
+  /code/token:
+    post:
+      tags:
+        - OAuth2
+      summary: Obtain access token with "authorization_code" grant.
+      externalDocs:
+        description: RFC 6749 - The OAuth2.0 Authorization Framework
+        url: https://tools.ietf.org/html/rfc6749#section-4.1.3
+      operationId: obtainAccessTokenViaCodeGrant
+      requestBody:
+        $ref: './components/requestBodies/TokenRequestCodeGrant.yml'
+      responses:
+        '200':
+          $ref: './components/responses/OAuth2TokenSuccessResponse.yml'
+        '4XX':
+          $ref: './components/responses/OAuth2TokenErrorResponse.yml'
+      security:
+        - ClientPasswordHttpBasic: []
+  /password/token:
+    post:
+      tags:
+        - OAuth2
+      summary: Obtain access token with "password" grant.
+      externalDocs:
+        description: RFC 6749 - The OAuth2.0 Authorization Framework
+        url: https://tools.ietf.org/html/rfc6749#section-4.3.2
+      operationId: obtainAccessTokenViaPasswordGrant
+      requestBody:
+        $ref: './components/requestBodies/TokenRequestPasswordGrant.yml'
+      responses:
+        '200':
+          $ref: './components/responses/OAuth2TokenSuccessResponse.yml'
+        '4XX':
+          $ref: './components/responses/OAuth2TokenErrorResponse.yml'
+      security:
+        - ClientPasswordHttpBasic: []
+  /client/token:
+    post:
+      tags:
+        - OAuth2
+      summary: Obtain access token with "client_credentials" grant.
+      externalDocs:
+        description: RFC 6749 - The OAuth2.0 Authorization Framework
+        url: https://tools.ietf.org/html/rfc6749#section-4.4.2
+      operationId: obtainAccessTokenViaClientCredentialsGrant
+      requestBody:
+        $ref: './components/requestBodies/TokenRequestClientCredentialsGrant.yml'
+      responses:
+        '200':
+          $ref: './components/responses/OAuth2TokenSuccessResponse.yml'
+        '4XX':
+          $ref: './components/responses/OAuth2TokenErrorResponse.yml'
+      security:
+        - ClientPasswordHttpBasic: []
+  /refresh/token:
+    post:
+      tags:
+        - OAuth2
+      summary: Refresh access token.
+      externalDocs:
+        description: RFC 6749 - The OAuth2.0 Authorization Framework
+        url: https://tools.ietf.org/html/rfc6749#section-6
+      operationId: obtainAccessTokenViaRefreshGrant
+      requestBody:
+        $ref: './components/requestBodies/TokenRequestRefreshGrant.yml'
+      responses:
+        '200':
+          $ref: './components/responses/OAuth2TokenSuccessResponse.yml'
+        '4XX':
+          $ref: './components/responses/OAuth2TokenErrorResponse.yml'
+      security:
+        - ClientPasswordHttpBasic: []
+components:
+  securitySchemes:
+    ClientPasswordHttpBasic:
+      description: |-
+        Clients in possession of a client password MAY use the HTTP Basic authentication scheme as defined in [[RFC2617](https://tools.ietf.org/html/rfc2617)] to authenticate with the authorization server.
+
+        Use "client_id" as username and "client_secret" as password.
+
+        [RFC 6749 - 2.3.1. Client Password](https://tools.ietf.org/html/rfc6749#section-2.3.1)
+      type: http
+      scheme: Basic
