@@ -1,0 +1,56 @@
+# OAuth2TokenSuccessResponse.yml
+description: |-
+  Successful Response.
+
+  [The OAuth2.0 Authorization Framework - 5.1. Successful Response](https://tools.ietf.org/html/rfc6749#section-5.1)
+
+  The authorization server issues an access token and optional refresh token, and constructs the response by adding the following parameters to the entity-body of the HTTP response with a 200 (OK) status code.
+headers:
+  Cache-Control:
+    schema:
+      type: string
+      example: no-store
+  Pragma:
+    schema:
+      type: string
+      example: no-cache
+content:
+  application/json:
+    schema:
+      title: Token
+      description: |-
+        Access Token
+
+        [The OAuth2.0 Authorization Framework - 1.4. Access Token](https://tools.ietf.org/html/rfc6749#section-1.4)
+
+        Access tokens are credentials used to access protected resources.  An access token is a string representing an authorization issued to the client.  The string is usually opaque to the client.  Tokens represent specific scopes and durations of access, granted by the resource owner, and enforced by the resource server and authorization server.
+      type: object
+      required:
+        - access_token
+        - token_type
+      properties:
+        access_token:
+          description: |-
+            The access token issued by the authorization server.
+          type: string
+          example: 2YotnFZFEjr1zCsicMWpAA
+        token_type:
+          description: |-
+            The type of the token issued as described in [Section 7.1](https://tools.ietf.org/html/rfc6749#section-7.1).  Value is case insensitive.
+          type: string
+          example: Bearer
+        expires_in:
+          description: |-
+            **RECOMMENDED**. The lifetime in seconds of the access token.  For example, the value "3600" denotes that the access token will expire in one hour from the time the response was generated. If omitted, the authorization server SHOULD provide the expiration time via other means or document the default value.
+          type: integer
+          example: 3600
+        refresh_token:
+          description: |-
+            The refresh token, which can be used to obtain new access tokens using the same authorization grant as described in [Section 6](https://tools.ietf.org/html/rfc6749#section-6).
+          type: string
+          example: tGzv3JOkF0XG5Qx2TlKWIA
+        scope:
+          description: |-
+            **OPTIONAL**, if identical to the scope requested by the client; otherwise, **REQUIRED**.  The scope of the access token as described by [Section 3.3](https://tools.ietf.org/html/rfc6749#section-3.3).
+          type: string
+          example: 'read write'

@@ -1,0 +1,34 @@
+# TokenRequestCodeGrant.yml
+description: |-
+  Access token request body
+content:
+  application/x-www-form-urlencoded:
+    schema:
+      type: object
+      required:
+        - grant_type
+        - code
+      properties:
+        grant_type:
+          description: |-
+            Value **MUST** be set to "authorization_code".
+          type: string
+          enum:
+            - authorization_code
+          example: authorization_code
+        code:
+          description: |-
+            The authorization code received from the authorization server.
+          type: string
+          example: SplxlOBeZQQYbYS6WxSbIA
+        redirect_uri:
+          description: |-
+            **REQUIRED**, if the "redirect_uri" parameter was included in the authorization request as described in Section [4.1.1](https://tools.ietf.org/html/rfc6749#section-4.1.1), and their values **MUST** be identical.
+          type: string
+          example: 'https://client.example.com/cb'
+        client_id:
+          description: |-
+            **REQUIRED**, if the client is not authenticating with the authorization server as described in Section [3.2.1](https://tools.ietf.org/html/rfc6749#section-3.2.1).
+          type: string
+          example: s6BhdRkqt3
+required: true
