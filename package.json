@@ -1,0 +1,24 @@
+{
+  "name": "oauth2_as_oas3_components",
+  "version": "1.0.0",
+  "description": "OAuth2 definitions as OpenAPI Spec 3.0 components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ybelenko/oauth2_as_oas3_components.git"
+  },
+  "keywords": [
+    "components",
+    "oauth2",
+    "openapi",
+    "oas3"
+  ],
+  "author": "Yuriy Belenko <yura-bely@mail.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ybelenko/oauth2_as_oas3_components/issues"
+  },
+  "homepage": "https://github.com/ybelenko/oauth2_as_oas3_components#readme",
+  "files": [
+    "dist"
+  ]
+}

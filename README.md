@@ -40,6 +40,32 @@ paths:
 
 Extended example with refs [dist/oauth2_endpoints_with_refs.yml](dist/oauth2_endpoints_with_refs.yml)
 
+### NPM
+[Install NPM and Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+Then run in terminal:
+```console
+npm i --save oauth2_as_oas3_components
+```
+
+Use provided components via `$ref` attribute like:
+
+```yaml
+paths:
+  /token:
+    post:
+      summary: Obtain access token with "authorization_code" grant.
+      requestBody:
+        $ref: './node_modules/oauth2_as_oas3_components/dist/components/requestBodies/TokenRequestCodeGrant.yml'
+      responses:
+        '200':
+          $ref: './node_modules/oauth2_as_oas3_components/dist/components/responses/OAuth2TokenSuccessResponse.yml'
+        '4XX':
+          $ref: './node_modules/oauth2_as_oas3_components/dist/components/responses/OAuth2TokenErrorResponse.yml'
+```
+
+Extended example with refs [dist/oauth2_endpoints_with_refs.yml](dist/oauth2_endpoints_with_refs.yml)
+
 ## Contributing
 
 If you have any suggestions please submit an issue.
