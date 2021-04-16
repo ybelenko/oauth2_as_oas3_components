@@ -14,6 +14,32 @@ Since [RFC 6749 - The OAuth2.0 Authorization Framework - 2.3.1. Client Password]
 ### Copy Paste
 Since it's not actually a code, but markup you can just copy anything you want from [dist/oauth2_endpoints.yml](dist/oauth2_endpoints.yml).
 
+### Composer
+Install [Composer - Dependency Manager for PHP](https://getcomposer.org/download/)
+
+Then run in terminal:
+```console
+composer require ybelenko/oauth2_as_oas3_components
+```
+
+Use provided components via `$ref` attribute like:
+
+```yaml
+paths:
+  /token:
+    post:
+      summary: Obtain access token with "authorization_code" grant.
+      requestBody:
+        $ref: './vendor/ybelenko/oauth2_as_oas3_components/dist/components/requestBodies/TokenRequestCodeGrant.yml'
+      responses:
+        '200':
+          $ref: './vendor/ybelenko/oauth2_as_oas3_components/dist/components/responses/OAuth2TokenSuccessResponse.yml'
+        '4XX':
+          $ref: './vendor/ybelenko/oauth2_as_oas3_components/dist/components/responses/OAuth2TokenErrorResponse.yml'
+```
+
+Extended example with refs [dist/oauth2_endpoints_with_refs.yml](dist/oauth2_endpoints_with_refs.yml)
+
 ## Contributing
 
 If you have any suggestions please submit an issue.
