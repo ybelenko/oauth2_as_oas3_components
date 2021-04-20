@@ -14,6 +14,8 @@ Since [RFC 6749 - The OAuth2.0 Authorization Framework - 2.3.1. Client Password]
 ### Copy Paste
 Since it's not actually a code, but markup you can just copy anything you want from [dist/oauth2_endpoints.yml](dist/oauth2_endpoints.yml).
 
+There is also enhanced example with polymorphism at [dist/oauth2_endpoints_polymorphism.yml](dist/oauth2_endpoints_polymorphism.yml). **Please, make sure that your tools supports polymorphism. This example contains new features not highly adopted yet. Check at least `oneOf` property support. I wouldn't use it myself because most of the OpenAPI tools have issues with polymorphism now, but this example may be useful in forseeable future.**
+
 ### Composer
 Install [Composer - Dependency Manager for PHP](https://getcomposer.org/download/)
 
